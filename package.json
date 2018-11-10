@@ -1,0 +1,26 @@
+{
+  "name": "web-speech-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hi-manshu-kumar/web-speech-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hi-manshu-kumar/web-speech-bot/issues"
+  },
+  "homepage": "https://github.com/hi-manshu-kumar/web-speech-bot#readme",
+  "dependencies": {
+    "apiai": "^4.0.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  }
+}
