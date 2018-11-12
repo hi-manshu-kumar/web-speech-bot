@@ -1,0 +1,74 @@
+#env setup
+to set the .env file first create one file at the root of the directory
+name it ".env"
+add the keys to it
+APIAI_TOKEN = '',
+APIAI_SESSION_ID = "'
+
+and require it in your project by installing it using `npm i dotenv`
+in index.js
+require(dotenv).config();
+const APIAI_TOKEN = process.env.APIAI_TOKEN
+const APIAI_SESSION_ID = process.env.APIAI_SESSION_ID
+
+#nodejs url/server
+to get the port on which it is running we have
+server.address().port       - 5000
+app.settings.env            -   dev
+
+var url = require('url');
+var adr = 'http://localhost:8080/default.htm?year=2017&month=february';
+var q = url.parse(adr, true);
+q.host          //localhost:8080
+q.pathname      //    /default
+q.search        //    ?year=2017&month=february
+
+/*The query property returns an object with all the querystring parameters as properties:*/
+var qdata = q.query;
+console.log(qdata.month);   //february 
+
+https://www.tutorialspoint.com/nodejs/nodejs_web_module.htm
+
+#speech recognition
+
+we have these ability built in the browser 
+to let the browser listen for the voice
+
+const SpeechRecognition = window.SpeechRecognizition || window.webkitSpeechRecognition;     // 1st one is for chrome and second for firfox
+const recognition = new SpeechRecognition();                                                
+
+//configs to set
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
+//to start the recognition
+function startVoice() {
+    recognition.start();
+}
+
+//adding addEventListener to recognition
+recognition.addEventListener('result', (e)=>{
+    console.log('Result has been detected.');
+
+    let last = e.results.length - 1;
+    let text = e.results[last][0].transcript;                       // text contains the word that has been said in the voice
+
+    outputYou.textContent = text;                                               
+    console.log('Confidence: ' + e.results[0][0].confidence);
+
+    socket.emit('chat message', text);
+});
+
+//to end the recognition
+recognition.addEventListener('speechend', () => {
+    recognition.stop();
+});
+
+#speech synthesis
+
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance();               //instance is create of the speechsynthesis
+    utterance.text = "text";                                        //utterance text variable is given the value by us
+    synth.speak(utterance);                                         //now to output it as voice we have this synth.speak()
+

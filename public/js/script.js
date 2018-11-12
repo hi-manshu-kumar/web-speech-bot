@@ -48,6 +48,7 @@ function synthVoice(text) {
 
 socket.on('bot reply', function(replyText) {
     synthVoice(replyText);
-    if(replyText == '') replyText = '(No answer...)';
+    if(replyText == '') 
+        replyText = '(No answer...)';
     outputBot.textContent = replyText;
 });

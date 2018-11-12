@@ -4,13 +4,17 @@ const APIAI_SESSION_ID = process.env.APIAI_SESSION_ID;
 
 const express = require("express");
 const apiai = require('apiai')(APIAI_TOKEN);
+const url = require('url');
 
 const app = express();
 
 app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res)=> {
+    console.log("entered / route");
+    var q = url.parse(req.url, true);
+    console.log('url', q);
     res.sendFile('index.html');
 });
 
@@ -19,7 +23,7 @@ const server = app.listen(process.env.PORT || 5000, () => {
 });
 
 const io = require('socket.io')(server);
-
+    
 io.on("connection", (socket) => {
     socket.on("chat message", (text) => {
 
